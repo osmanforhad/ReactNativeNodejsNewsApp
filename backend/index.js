@@ -1,23 +1,15 @@
 const express = require('express');
 
 //import the developer created component
-const News = require('./news/news');
+const newsRouter = require('./routers/news')
 
 //initialize the express
 const app = express();
 
 //using express static middleware
-app.use(express.static('public'))
-
-
-const news = new News()
-
-const test = async() => {
-    const data = await news.getByCategory('tech');
-    console.log(data);
-}
-
-test();
+app.use(express.static('public'));
+//setup prefix using router
+app.use('/api', newsRouter);
 
 //setup the port number
 app.listen(5000, () => {

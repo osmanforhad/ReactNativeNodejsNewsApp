@@ -7,7 +7,7 @@ const message = select('.message');
 //function for display message
 const displayMessage = (text, color) => {
     //setup the message style
-    message.style.visibility = 'visible'
+    message.style.visibility = 'visible';
     message.style.backgroundColor = color;
 
     message.innerText = text;
@@ -26,7 +26,7 @@ const validateForm = () => {
     const category = select('#category').value;
 
     //define the accepted file format
-    const acceptedImageFiles = ['jpg', 'jpeg', 'png']
+    const acceptedImageFiles = ['jpg', 'jpeg', 'png'];
 
     if (!title || !content || !thumbnail || category == '0') {
         //show error message
@@ -44,7 +44,7 @@ const validateForm = () => {
     return true;
 };
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async(e) => {
     e.preventDefault();
 
     //form validation
@@ -52,6 +52,16 @@ form.addEventListener('submit', (e) => {
 
     if (valid) {
         //submit the form
+        const formData = new FormData(form);
+        await postData(formData);
     }
 
 });
+
+//function for post data into server
+const postData = async(data) => {
+    await fetch('/api/create', {
+        method: 'POST',
+        body: data,
+    });
+}
