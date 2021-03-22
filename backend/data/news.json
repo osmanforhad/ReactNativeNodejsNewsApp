@@ -11,5 +11,12 @@
     "category": "political",
     "id": "1616405536554",
     "thumbnail": "http://localhost:5000/1616405536554-develop-hybrid-mobile-app-with-react-native-and-nodejs.jpg"
+  },
+  {
+    "title": "node js mongo db title",
+    "content": "node js mongo db content",
+    "category": "breaking-news",
+    "id": "1616408284772",
+    "thumbnail": "http://localhost:5000/1616408284772-nodejs-mongo-db.png"
   }
 ]
