@@ -8,6 +8,7 @@ const app = express();
 
 //using express static middleware
 app.use(express.static('public'));
+app.use(express.static('data/uploads'));
 //setup prefix using router
 app.use('/api', newsRouter);
 

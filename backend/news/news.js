@@ -23,12 +23,11 @@ class News {
     }
 
     //function for create post
-    async create(data) {
+    async create(data, id, imageName) {
             //read data
             const totalData = await this.getAll();
-            const id = this.createId()
 
-            totalData.push({...data, id });
+            totalData.push({...data, id, thumbnail: `http://localhost:5000/${imageName}` });
             //write data
             await fs.promises.writeFile(this.path, JSON.stringify(totalData, null, 2));
         } //end of the create function

@@ -1,14 +1,15 @@
 [
   {
-    "title": "some title",
-    "content": "some content",
+    "title": "title",
+    "content": "content",
     "category": "tech",
-    "id": "1616319872122"
+    "id": "1616405149147"
   },
   {
-    "title": "some title",
-    "content": "some content",
+    "title": "This is a title",
+    "content": "This is the content",
     "category": "political",
-    "id": "1616319898124"
+    "id": "1616405536554",
+    "thumbnail": "http://localhost:5000/1616405536554-develop-hybrid-mobile-app-with-react-native-and-nodejs.jpg"
   }
 ]
