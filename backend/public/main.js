@@ -58,10 +58,30 @@ form.addEventListener('submit', async(e) => {
 
 });
 
+//function for reset form
+const resetForm = () => {
+    select('#title').value = '';
+    select('#content').value = '';
+    select('#thumbnail').value = null;
+    select('#category').value = '0';
+    select('#featured-content').checked = false;
+}
+
 //function for post data into server
 const postData = async(data) => {
-    await fetch('/api/create', {
+    const result = await fetch('/api/create', {
         method: 'POST',
         body: data,
     });
+    if (result.ok) {
+        const response = await result.json();
+        if (response.success) {
+            displayMessage(response.message, 'green');
+            //after success form to reset the form
+            resetForm();
+        }
+        if (!response.success) {
+            displayMessage(response.message, 'red')
+        }
+    }
 }

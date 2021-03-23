@@ -25,22 +25,31 @@ class News {
     //function for create post
     async create(data, id, imageName) {
             //read data
-            const totalData = await this.getAll();
+            const totalData = JSON.parse(await fs.promises.readFile(this.path));
 
-            totalData.push({...data, id, thumbnail: `http://localhost:5000/${imageName}` });
+            const { content } = data;
+            const desc = content.substr(0, 100) + '...'
+
+            totalData.push({
+                ...data,
+                id,
+                desc,
+                thumbnail: `http://localhost:5000/${imageName}`
+            });
             //write data
             await fs.promises.writeFile(this.path, JSON.stringify(totalData, null, 2));
         } //end of the create function
 
     //function for find all data
     async getAll() {
-            return JSON.parse(await fs.promises.readFile(this.path));
+            const data = JSON.parse(await fs.promises.readFile(this.path));
+            return data.filter(news => delete news.content);
         } //end of the getAll function
 
     //function for find single post
     async getSingle(id) {
             //retrive all the data from database
-            const data = await this.getAll();
+            const data = await JSON.parse(await fs.promises.readFile(this.path));
             return data.find(news => news.id === id);
         } //end of the getSingle function
 

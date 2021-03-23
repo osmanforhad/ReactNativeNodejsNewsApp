@@ -1,7 +1,7 @@
 const express = require('express');
 
 //import the developer created component
-const newsRouter = require('./routers/news')
+const newsRouter = require('./routers/news');
 
 //initialize the express
 const app = express();
