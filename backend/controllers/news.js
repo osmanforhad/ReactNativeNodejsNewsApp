@@ -72,11 +72,18 @@ const getSingleNews = async(req, res) => {
 //function for get data by category
 const getNewsByCategory = async(req, res) => {
     try {
+        const { category, qty } = req.params;
         const data = await news.getByCategory(req.params.category);
         if (!data) {
             return res.json({
                 success: false,
                 message: 'Post not found!'
+            });
+        }
+        if (!qty) {
+            return res.json({
+                success: true,
+                news: [...data].splice(0, qty)
             });
         }
         res.json({
@@ -92,10 +99,28 @@ const getNewsByCategory = async(req, res) => {
     }
 };
 
+//function for search functionality
+const searchPosts = async(req, res) => {
+    try {
+        const response = await news.searchPosts(req.params.query);
+        if (response.length === 0) {
+            return res.json({ success: false, message: 'No match found..' });
+            res.json({ success: true, news: response });
+        }
+    } catch (error) {
+        res.json({
+            success: false,
+            message: 'Someting went wrong, server error!',
+        });
+        console.log(error);
+    }
+};
+
 //export component for out put
 module.exports = {
     createNews,
     getAllNews,
     getSingleNews,
     getNewsByCategory,
+    searchPosts,
 };

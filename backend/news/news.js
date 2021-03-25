@@ -34,7 +34,7 @@ class News {
                 ...data,
                 id,
                 desc,
-                thumbnail: `http://localhost:5000/${imageName}`
+                thumbnail: `http://192.168.1.30:5000/${imageName}`
             });
             //write data
             await fs.promises.writeFile(this.path, JSON.stringify(totalData, null, 2));
@@ -45,6 +45,18 @@ class News {
             const data = JSON.parse(await fs.promises.readFile(this.path));
             return data.filter(news => delete news.content);
         } //end of the getAll function
+
+    //function for search posts from database
+    async searchPosts(query) {
+        try {
+            const data = await this.getAll();
+            return data.filter(news =>
+                news.title.toLowerCase().includes(query.toLowerCase())
+            );
+        } catch (error) {
+            console.log('Error while searching posts!');
+        }
+    }
 
     //function for find single post
     async getSingle(id) {
